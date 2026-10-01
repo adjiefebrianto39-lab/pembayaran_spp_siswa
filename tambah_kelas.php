@@ -13,47 +13,82 @@ if (isset($_POST['simpan'])) {
     );
 
     header("Location: kelas.php");
+    exit;
 
 }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
+    <meta charset="UTF-8">
+
     <title>Tambah Kelas</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
 </head>
 
-<body>
+<body class="bg-light">
 
-<h2>Tambah Kelas</h2>
+<div class="container py-5">
 
-<form method="POST">
+    <div class="col-md-6 mx-auto">
 
-    <p>Nama Kelas</p>
+        <div class="card shadow border-0">
 
-    <input
-        type="text"
-        name="nama_kelas"
-        placeholder="Contoh: X RPL 1"
-    >
+            <div class="card-body p-4">
 
-    <br><br>
+                <h3 class="fw-bold mb-4">
+                    Tambah Kelas
+                </h3>
 
-    <button type="submit" name="simpan">
-        Simpan
-    </button>
+                <form method="POST">
 
-</form>
+                    <label class="form-label">
+                        Nama Kelas
+                    </label>
 
-<br>
+                    <input
+                        type="text"
+                        name="nama_kelas"
+                        class="form-control"
+                        placeholder="Contoh: X RPL 1"
+                        required
+                    >
 
-<a href="kelas.php">
-    Kembali
-</a>
+                    <br>
+
+                    <button
+                        type="submit"
+                        name="simpan"
+                        class="btn btn-primary"
+                    >
+                        Simpan
+                    </button>
+
+                    <a
+                        href="kelas.php"
+                        class="btn btn-secondary"
+                    >
+                        Kembali
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 

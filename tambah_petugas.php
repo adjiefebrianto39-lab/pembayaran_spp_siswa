@@ -6,66 +6,151 @@ if (isset($_POST['simpan'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $nama = $_POST['nama_petugas'];
     $level = $_POST['level'];
 
-    mysqli_query(
-        $koneksi, 
-        " INSERT INTO petugas (username, password, nama_petugas, level)
-        VALUES ('$username', '$password', '$nama', '$level')"
+    $cek = mysqli_query(
+        $koneksi,
+        "SELECT * FROM petugas
+         WHERE username='$username'"
     );
 
-    header("Location: petugas.php");
+    if (mysqli_num_rows($cek) > 0) {
+
+        echo "<script>
+                alert('Username sudah digunakan!');
+              </script>";
+
+    } else {
+
+        mysqli_query($koneksi, "
+            INSERT INTO petugas
+            (username, password, level)
+            VALUES
+            ('$username', '$password', '$level')
+        ");
+
+        header("Location: petugas.php");
+        exit;
+
+    }
 
 }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+
+    <meta charset="UTF-8">
+
     <title>Tambah Petugas</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
 </head>
 
-<body>
+<body class="bg-light">
 
-<h2>Tambah Petugas</h2>
+<div class="container py-5">
 
-<form method="POST">
+    <div class="col-md-6 mx-auto">
 
-    <p>Username</p>
-    <input type="text" name="username">
+        <div class="card shadow border-0">
 
-    <p>Password</p>
-    <input type="password" name="password">
+            <div class="card-body p-4">
 
-    <p>Nama</p>
-    <input type="text" name="nama_petugas">
+                <h3 class="fw-bold mb-4">
+                    Tambah Petugas
+                </h3>
 
-    <p>Level</p>
+                <form method="POST">
 
-    <select name="level">
+                    <div class="mb-3">
 
-        <option value="admin">Admin</option>
+                        <label class="form-label">
+                            Username
+                        </label>
 
-        <option value="petugas">Petugas</option>
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            required
+                        >
 
-        <option value="siswa">Siswa</option>
+                    </div>
 
-    </select>
+                    <div class="mb-3">
 
-    <br><br>
+                        <label class="form-label">
+                            Password
+                        </label>
 
-    <button type="submit" name="simpan">
-        Simpan
-    </button>
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required
+                        >
 
-</form>
+                    </div>
 
-<br>
+                    <div class="mb-4">
 
-<a href="petugas.php">Kembali</a>
+                        <label class="form-label">
+                            Level
+                        </label>
+
+                        <select
+                            name="level"
+                            class="form-select"
+                        >
+
+                            <option value="admin">
+                                Admin
+                            </option>
+
+                            <option value="petugas">
+                                Petugas
+                            </option>
+
+                            <option value="siswa">
+                                Siswa
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        name="simpan"
+                        class="btn btn-primary"
+                    >
+                        Simpan
+                    </button>
+
+                    <a
+                        href="petugas.php"
+                        class="btn btn-secondary"
+                    >
+                        Kembali
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 

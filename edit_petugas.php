@@ -12,97 +12,216 @@ $data = mysqli_query(
 
 $petugas = mysqli_fetch_assoc($data);
 
+
 if (isset($_POST['update'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $nama = $_POST['nama'];
     $level = $_POST['level'];
 
+
     mysqli_query($koneksi, "
-        UPDATE petugas
-        SET username='$username',
-            password='$password',
-            nama_petugas='$nama',
-            level='$level'
+
+        UPDATE petugas SET
+
+        username='$username',
+        password='$password',
+        level='$level'
+
         WHERE id_petugas='$id'
+
     ");
 
+
     header("Location: petugas.php");
+
+    exit;
 
 }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Edit Petugas</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
 </head>
 
-<body>
 
-<h2>Edit Petugas</h2>
+<body class="bg-light">
 
-<form method="POST">
 
-    <p>Username</p>
+<div class="container py-5">
 
-    <input
-        type="text"
-        name="username"
-        value="<?= $petugas['username']; ?>"
-    >
 
-    <p>Password</p>
+    <div class="col-md-6 mx-auto">
 
-    <input
-        type="text"
-        name="password"
-        value="<?= $petugas['password']; ?>"
-    >
 
-    <p>Nama</p>
+        <div class="card shadow border-0">
 
-    <input
-        type="text"
-        name="nama"
-        value="<?= $petugas['nama_petugas']; ?>"
-    >
 
-    <p>Level</p>
+            <div class="card-body p-4">
 
-    <select name="level">
 
-        <option value="admin"
-            <?= $petugas['level'] == 'admin' ? 'selected' : ''; ?>>
-            Admin
-        </option>
+                <h3 class="fw-bold mb-1">
+                    Edit Data Petugas
+                </h3>
 
-        <option value="petugas"
-            <?= $petugas['level'] == 'petugas' ? 'selected' : ''; ?>>
-            Petugas
-        </option>
+                <p class="text-muted mb-4">
+                    Ubah informasi akun petugas
+                </p>
 
-        <option value="siswa"
-            <?= $petugas['level'] == 'siswa' ? 'selected' : ''; ?>>
-            Siswa
-        </option>
 
-    </select>
+                <form method="POST">
 
-    <br><br>
 
-    <button type="submit" name="update">
-        Update
-    </button>
+                    <!-- ID -->
 
-</form>
+                    <div class="mb-3">
 
-<br>
+                        <label class="form-label">
+                            ID Petugas
+                        </label>
 
-<a href="petugas.php">Kembali</a>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="<?= $petugas['id_petugas']; ?>"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <!-- Username -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            value="<?= $petugas['username']; ?>"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input
+                            type="text"
+                            name="password"
+                            class="form-control"
+                            value="<?= $petugas['password']; ?>"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Level -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Level
+                        </label>
+
+                        <select
+                            name="level"
+                            class="form-select"
+                            required
+                        >
+
+                            <option
+                                value="admin"
+                                <?= $petugas['level'] == 'admin'
+                                    ? 'selected'
+                                    : ''; ?>
+                            >
+                                Admin
+                            </option>
+
+                            <option
+                                value="petugas"
+                                <?= $petugas['level'] == 'petugas'
+                                    ? 'selected'
+                                    : ''; ?>
+                            >
+                                Petugas
+                            </option>
+
+                            <option
+                                value="siswa"
+                                <?= $petugas['level'] == 'siswa'
+                                    ? 'selected'
+                                    : ''; ?>
+                            >
+                                Siswa
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <button
+                        type="submit"
+                        name="update"
+                        class="btn btn-primary"
+                    >
+                        Update Data
+                    </button>
+
+
+                    <a
+                        href="petugas.php"
+                        class="btn btn-secondary"
+                    >
+                        Kembali
+                    </a>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
 
 </body>
 

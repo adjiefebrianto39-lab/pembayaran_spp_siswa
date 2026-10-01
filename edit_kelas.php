@@ -25,46 +25,124 @@ if (isset($_POST['update'])) {
 
     header("Location: kelas.php");
 
+    exit;
 }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Edit Kelas</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
 </head>
 
-<body>
 
-<h2>Edit Kelas</h2>
+<body class="bg-light">
 
-<form method="POST">
 
-    <p>Nama Kelas</p>
+<div class="container py-5">
 
-    <input
-        type="text"
-        name="nama_kelas"
-        value="<?= $kelas['nama_kelas']; ?>"
-    >
 
-    <br><br>
+    <div class="col-md-6 mx-auto">
 
-    <button type="submit" name="update">
-        Update
-    </button>
 
-</form>
+        <div class="card shadow border-0">
 
-<br>
 
-<a href="kelas.php">
-    Kembali
-</a>
+            <div class="card-body p-4">
+
+
+                <h3 class="fw-bold mb-1">
+                    Edit Data Kelas
+                </h3>
+
+                <p class="text-muted mb-4">
+                    Ubah informasi kelas
+                </p>
+
+
+                <form method="POST">
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            ID Kelas
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="<?= $kelas['id_kelas']; ?>"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Nama Kelas
+                        </label>
+
+                        <input
+                            type="text"
+                            name="nama_kelas"
+                            class="form-control"
+                            value="<?= $kelas['nama_kelas']; ?>"
+                            placeholder="Contoh: X RPL 1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <button
+                        type="submit"
+                        name="update"
+                        class="btn btn-primary"
+                    >
+                        Update Data
+                    </button>
+
+
+                    <a
+                        href="kelas.php"
+                        class="btn btn-secondary"
+                    >
+                        Kembali
+                    </a>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
 
 </body>
 

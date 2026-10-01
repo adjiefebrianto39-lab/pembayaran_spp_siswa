@@ -2,97 +2,159 @@
 
 include "koneksi.php";
 
-$data = mysqli_query($koneksi, "SELECT * FROM siswa");
+$data = mysqli_query(
+    $koneksi,
+    "SELECT * FROM siswa"
+);
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+
+    <meta charset="UTF-8">
+
     <title>Data Siswa</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
 </head>
 
-<body>
+<body class="bg-light">
 
-<h2>DATA SISWA</h2>
+<div class="container-fluid py-4">
 
-<a href="dashboard.php">Dashboard</a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<br><br>
+        <div>
 
-<a href="tambah_siswa.php">
-    + Tambah Siswa
-</a>
+            <h2 class="fw-bold">
+                Data Siswa
+            </h2>
 
-<br><br>
+            <p class="text-muted">
+                Kelola data siswa sekolah
+            </p>
 
-<table border="1" cellpadding="10">
+        </div>
 
-    <tr>
-        <th>No</th>
-        <th>NISN</th>
-        <th>NIS</th>
-        <th>Nama</th>
-        <th>ID Kelas</th>
-        <th>Nama Kelas</th>
-        <th>Alamat</th>
-        <th>No Telp</th>
-        <th>ID SPP</th>
-        <th>Aksi</th>
-    </tr>
+        <div>
 
-    <?php
-
-    $no = 1;
-
-    while ($siswa = mysqli_fetch_assoc($data)) {
-
-    ?>
-
-    <tr>
-
-        <td><?= $no++; ?></td>
-
-        <td><?= $siswa['nisn']; ?></td>
-
-        <td><?= $siswa['nis']; ?></td>
-
-        <td><?= $siswa['nama']; ?></td>
-
-        <td><?= $siswa['id_kelas']; ?></td>
-
-        <td><?= $siswa['nama_kelas']; ?></td>
-
-        <td><?= $siswa['alamat']; ?></td>
-
-        <td><?= $siswa['no_telp']; ?></td>
-
-        <td><?= $siswa['id_spp']; ?></td>
-
-        <td>
-
-            <a href="edit_siswa.php?nisn=<?= $siswa['nisn']; ?>">
-                Edit
+            <a href="dashboard.php"
+               class="btn btn-secondary">
+                Dashboard
             </a>
 
-            |
-
-            <a href="hapus_siswa.php?nisn=<?= $siswa['nisn']; ?>">
-                Hapus
+            <a href="tambah_siswa.php"
+               class="btn btn-primary">
+                + Tambah Siswa
             </a>
 
-        </td>
+        </div>
 
-    </tr>
+    </div>
 
-    <?php
 
-    }
+    <div class="card shadow-sm border-0">
 
-    ?>
+        <div class="card-body">
 
-</table>
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-primary">
+
+                        <tr>
+
+                            <th>No</th>
+                            <th>NISN</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Alamat</th>
+                            <th>No Telp</th>
+                            <th>ID SPP</th>
+                            <th>Aksi</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <?php
+
+                    $no = 1;
+
+                    while ($siswa = mysqli_fetch_assoc($data)) {
+
+                    ?>
+
+                    <tr>
+
+                        <td><?= $no++; ?></td>
+
+                        <td><?= $siswa['nisn']; ?></td>
+
+                        <td><?= $siswa['nis']; ?></td>
+
+                        <td><?= $siswa['nama']; ?></td>
+
+                        <td>
+
+                            <span class="badge bg-info text-dark">
+
+                                <?= $siswa['nama_kelas']; ?>
+
+                            </span>
+
+                        </td>
+
+                        <td><?= $siswa['alamat']; ?></td>
+
+                        <td><?= $siswa['no_telp']; ?></td>
+
+                        <td><?= $siswa['id_spp']; ?></td>
+
+                        <td>
+
+                            <a
+                                href="edit_siswa.php?nisn=<?= $siswa['nisn']; ?>"
+                                class="btn btn-warning btn-sm"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="hapus_siswa.php?nisn=<?= $siswa['nisn']; ?>"
+                                class="btn btn-danger btn-sm"
+                            >
+                                Hapus
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    <?php } ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 

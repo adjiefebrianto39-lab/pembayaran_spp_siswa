@@ -45,116 +45,268 @@ if (isset($_POST['bayar'])) {
         )
     ");
 
-    echo "Pembayaran berhasil";
+    echo "<script>
+            alert('Pembayaran berhasil!');
+            window.location='cek_pembayaran.php';
+          </script>";
 
 }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
+    <meta charset="UTF-8">
+
     <title>Pembayaran SPP</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
 </head>
 
-<body>
+<body class="bg-light">
 
-<h2>Pembayaran SPP</h2>
+<div class="container py-5">
 
-<a href="dashboard.php">Dashboard</a>
+    <div class="mb-4">
 
-<br><br>
+        <a
+            href="dashboard.php"
+            class="btn btn-secondary mb-3"
+        >
+            ← Dashboard
+        </a>
 
-<form method="POST">
+        <h2 class="fw-bold">
+            Pembayaran SPP
+        </h2>
 
-    <p>Status</p>
+        <p class="text-muted">
+            Masukkan data transaksi pembayaran siswa
+        </p>
 
-    <select name="status">
+    </div>
 
-        <option value="Belum Lunas">
-            Belum Lunas
-        </option>
 
-        <option value="Sudah Lunas">
-            Sudah Lunas
-        </option>
+    <div class="card shadow border-0">
 
-    </select>
+        <div class="card-body p-4">
 
-    <p>NISN</p>
+            <form method="POST">
 
-    <input
-        type="text"
-        name="nisn"
-        required
-    >
+                <div class="row">
 
-    <p>Tanggal Bayar</p>
 
-    <input
-        type="date"
-        name="tgl_bayar"
-        required
-    >
+                    <div class="col-md-6">
 
-    <p>Tanggal Terakhir Bayar</p>
+                        <div class="mb-3">
 
-    <input
-        type="date"
-        name="tgl_terakhir_bayar"
-        required
-    >
+                            <label class="form-label">
+                                Status
+                            </label>
 
-    <p>Batas Pembayaran</p>
+                            <select
+                                name="status"
+                                class="form-select"
+                            >
 
-    <input
-        type="date"
-        name="batas_pembayaran"
-        required
-    >
+                                <option value="belum lunas">
+                                    Belum Lunas
+                                </option>
 
-    <p>Jumlah Bulan</p>
+                                <option value="sudah lunas">
+                                    Sudah Lunas
+                                </option>
 
-    <input
-        type="number"
-        name="jumlah_bulan"
-        required
-    >
+                            </select>
 
-    <p>ID SPP</p>
+                        </div>
 
-    <input
-        type="number"
-        name="id_spp"
-        required
-    >
 
-    <p>Nominal Bayar</p>
+                        <div class="mb-3">
 
-    <input
-        type="number"
-        name="nominal_bayar"
-        required
-    >
+                            <label class="form-label">
+                                NISN
+                            </label>
 
-    <p>Jumlah Bayar</p>
+                            <input
+                                type="text"
+                                name="nisn"
+                                class="form-control"
+                                required
+                            >
 
-    <input
-        type="number"
-        name="jumlah_bayar"
-        required
-    >
+                        </div>
 
-    <br><br>
 
-    <button type="submit" name="bayar">
-        Bayar
-    </button>
+                        <div class="mb-3">
 
-</form>
+                            <label class="form-label">
+                                Tanggal Bayar
+                            </label>
+
+                            <input
+                                type="date"
+                                name="tgl_bayar"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Tanggal Terakhir Bayar
+                            </label>
+
+                            <input
+                                type="date"
+                                name="tgl_terakhir_bayar"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Batas Pembayaran
+                            </label>
+
+                            <input
+                                type="date"
+                                name="batas_pembayaran"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Jumlah Bulan
+                            </label>
+
+                            <input
+                                type="number"
+                                name="jumlah_bulan"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                ID SPP
+                            </label>
+
+                            <input
+                                type="number"
+                                name="id_spp"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Nominal Bayar
+                            </label>
+
+                            <input
+                                type="number"
+                                name="nominal_bayar"
+                                class="form-control"
+                                placeholder="150000"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Jumlah Uang Dibayar
+                            </label>
+
+                            <input
+                                type="number"
+                                name="jumlah_bayar"
+                                class="form-control"
+                                placeholder="200000"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="alert alert-info">
+
+                            <strong>
+                                Catatan:
+                            </strong>
+
+                            <br>
+
+                            Sistem akan menghitung kembalian
+                            secara otomatis.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <hr>
+
+
+                <button
+                    type="submit"
+                    name="bayar"
+                    class="btn btn-success"
+                >
+                    💳 Proses Pembayaran
+                </button>
+
+                <a
+                    href="dashboard.php"
+                    class="btn btn-secondary"
+                >
+                    Batal
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 

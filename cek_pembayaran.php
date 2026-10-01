@@ -3,88 +3,181 @@
 include "koneksi.php";
 
 $data = mysqli_query($koneksi, "
+
     SELECT
         pembayaran.nisn,
         siswa.nama,
         siswa.no_telp,
         pembayaran.tgl_terakhir_bayar,
-        CURDATE() AS tgl_sekarang,
         pembayaran.jumlah_bulan,
         pembayaran.status
+
     FROM pembayaran
+
     JOIN siswa
     ON pembayaran.nisn = siswa.nisn
+
 ");
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
+    <meta charset="UTF-8">
+
     <title>Cek Pembayaran</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
 </head>
 
-<body>
+<body class="bg-light">
 
-<h2>Cek Pembayaran SPP</h2>
+<div class="container py-4">
 
-<a href="dashboard.php">Dashboard</a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<br><br>
+        <div>
 
-<table border="1" cellpadding="10">
+            <h2 class="fw-bold">
+                Cek Pembayaran
+            </h2>
 
-    <tr>
+            <p class="text-muted">
+                Informasi pembayaran siswa
+            </p>
 
-        <th>No</th>
-        <th>NISN</th>
-        <th>Nama</th>
-        <th>No Telp</th>
-        <th>Tgl Terakhir Bayar</th>
-        <th>Tgl Sekarang</th>
-        <th>Jumlah Bulan</th>
-        <th>Status Pembayaran</th>
+        </div>
 
-    </tr>
+        <a
+            href="dashboard.php"
+            class="btn btn-secondary"
+        >
+            Dashboard
+        </a>
 
-    <?php
+    </div>
 
-    $no = 1;
 
-    while ($pembayaran = mysqli_fetch_assoc($data)) {
+    <div class="card shadow-sm border-0">
 
-    ?>
+        <div class="card-body">
 
-    <tr>
+            <div class="table-responsive">
 
-        <td><?= $no++; ?></td>
+                <table class="table table-hover align-middle">
 
-        <td><?= $pembayaran['nisn']; ?></td>
+                    <thead class="table-primary">
 
-        <td><?= $pembayaran['nama']; ?></td>
+                        <tr>
 
-        <td><?= $pembayaran['no_telp']; ?></td>
+                            <th>No</th>
+                            <th>NISN</th>
+                            <th>Nama</th>
+                            <th>No Telp</th>
+                            <th>Tgl Terakhir Bayar</th>
+                            <th>Tgl Sekarang</th>
+                            <th>Jumlah Bulan</th>
+                            <th>Status</th>
 
-        <td><?= $pembayaran['tgl_terakhir_bayar']; ?></td>
+                        </tr>
 
-        <td><?= $pembayaran['tgl_sekarang']; ?></td>
+                    </thead>
 
-        <td><?= $pembayaran['jumlah_bulan']; ?></td>
+                    <tbody>
 
-        <td><?= $pembayaran['status']; ?></td>
+                    <?php
 
-    </tr>
+                    $no = 1;
 
-    <?php
+                    while ($pembayaran =
+                        mysqli_fetch_assoc($data)) {
 
-    }
+                    ?>
 
-    ?>
+                    <tr>
 
-</table>
+                        <td><?= $no++; ?></td>
+
+                        <td>
+                            <?= $pembayaran['nisn']; ?>
+                        </td>
+
+                        <td>
+                            <?= $pembayaran['nama']; ?>
+                        </td>
+
+                        <td>
+                            <?= $pembayaran['no_telp']; ?>
+                        </td>
+
+                        <td>
+                            <?= $pembayaran['tgl_terakhir_bayar']; ?>
+                        </td>
+
+                        <td>
+                            <?= date('Y-m-d'); ?>
+                        </td>
+
+                        <td>
+                            <?= $pembayaran['jumlah_bulan']; ?>
+                            bulan
+                        </td>
+
+                        <td>
+
+                            <?php
+
+                            if (
+                                $pembayaran['status']
+                                == 'sudah lunas'
+                            ) {
+
+                            ?>
+
+                                <span class="badge bg-success">
+                                    Sudah Lunas
+                                </span>
+
+                            <?php
+
+                            } else {
+
+                            ?>
+
+                                <span class="badge bg-danger">
+                                    Belum Lunas
+                                </span>
+
+                            <?php
+
+                            }
+
+                            ?>
+
+                        </td>
+
+                    </tr>
+
+                    <?php } ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 
